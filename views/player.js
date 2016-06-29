@@ -11,7 +11,7 @@ events: {
 
 clicked:function(){
   console.log("clicked small");
-  this.model.small()
+  document.getElementById("frontMenu").className = "";
 },
 large:function(){
   console.log("clicked large");

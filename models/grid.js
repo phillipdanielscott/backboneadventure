@@ -28,7 +28,5 @@ module.exports = Backbone.Model.extend({
       if (this.get('xValue') < 10) {
           this.set('xValue', this.get('xValue') + 1);    }
 },
-    clickedSmall:function(){
-      
-    }
+    
 });

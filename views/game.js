@@ -29,15 +29,10 @@ events: {
 
    clickRight: function () {
      console.log("we goin right");
-
        this.model.right()
 
    },
-   clicked: function(){
-     console.log("clicked small")
 
-
-   },
 
    render: function () {
          let upButton = this.el.querySelector('#yAxis');

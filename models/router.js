@@ -1,6 +1,7 @@
-let GridModel = require('./models/grid');
-let PlayerView = require('./views/player');
-let GameView = require('./views/game');
+let GridModel = require('./grid');
+let PlayerView = require('../views/player');
+let GameView = require('../views/game');
+
 
 module.exports = Backbone.Router.extend({
   initialize: function (){
@@ -20,11 +21,25 @@ module.exports = Backbone.Router.extend({
       el:document.getElementById('frontMenu')
     });
 
-    });
-  });
+}
+});
 
-  routes: {
-    newGame: function() {
-      
-    }
-  }
+
+// routes {
+//   'click':'removeFrontmenu'
+// }
+
+
+
+
+
+// removeFrontmenu: function (){
+//   console.log("we are in business");
+//   this.
+// },
+
+  // routes: {
+  //   newGame: function() {
+  //
+  //   }
+  // }
