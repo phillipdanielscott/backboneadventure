@@ -33,6 +33,11 @@ events: {
        this.model.right()
 
    },
+   clicked: function(){
+     console.log("clicked small")
+
+
+   },
 
    render: function () {
          let upButton = this.el.querySelector('#yAxis');

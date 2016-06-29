@@ -6,23 +6,44 @@
     <title>Grid Explorer</title>
   </head>
   <body>
-    <header>
-<input type="text" id ="username">
+
+<!-- /////player view////// -->
 
 
-</header>
-  <section id="D-pad">
-    <div id = "yAxis">
-      -
+    <div id = "frontMenu" class="Login">
+      <div class="Usernameinput">
+        <input id = "name" type="text" name="name" placeholder="USERNAME">
+
+        <button id = "Thisissmall" type="button" class = "small">Small</button>
+
+         <button id = "Thisislarge" type="button" name="large">Large</button>
+
+         <button id = "Thisisgiant" type="button" name="Giant">Giant</button>
+
+
+      </div>
     </div>
-    <div id = "xAxis">
-      -
+
+
+
+
+    <!-- ///game view/// -->
+
+    <div id = "game" class="hidden">
+
+      <section id="D-pad" class = "hidden">
+        <div id = "yAxis">
+          -
+        </div>
+        <div id = "xAxis">
+          -
+        </div>
+    <button id="up"> ^ </button>
+    <button id="down"> v </button>
+    <button id="left"> < </button>
+    <button id="right"> > </button>
+      </section>
     </div>
-<button id="up"> ^ </button>
-<button id="down"> v </button>
-<button id="left"> < </button>
-<button id="right"> > </button>
-  </section>
   <script src="http://underscorejs.org/underscore-min.js"></script>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script src="http://backbonejs.org/backbone-min.js"></script>

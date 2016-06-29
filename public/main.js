@@ -20,6 +20,13 @@ window.addEventListener('load', function (){
     model: myMoves,
     el:document.getElementById('D-pad'),
   });
+
+
+let player = new PlayerView({
+  model: myMoves,
+  el:document.getElementById('frontMenu')
+});
+
 });
 
 // let Axis = new yValue({
@@ -62,7 +69,10 @@ module.exports = Backbone.Model.extend({
     right: function () {
       if (this.get('xValue') < 10) {
           this.set('xValue', this.get('xValue') + 1);    }
-}
+},
+    clickedSmall:function(){
+      
+    }
 });
 
 },{}],3:[function(require,module,exports){
@@ -101,6 +111,11 @@ events: {
        this.model.right()
 
    },
+   clicked: function(){
+     console.log("clicked small")
+
+
+   },
 
    render: function () {
          let upButton = this.el.querySelector('#yAxis');
@@ -118,5 +133,29 @@ events: {
 });
 
 },{}],4:[function(require,module,exports){
+module.exports = Backbone.View.extend({
+
+  initialize: function (){
+    this.model.on('change', this.render,this );
+  },
+events: {
+  'click #Thisissmall': 'clicked',
+  'click #Thisislarge': 'large',
+  'click #Thisisgiant': 'giant'
+},
+
+clicked:function(){
+  console.log("clicked small");
+  this.model.small()
+},
+large:function(){
+  console.log("clicked large");
+},
+giant:function(){
+  console.log("clicked giant");
+}
+
+
+});
 
 },{}]},{},[1])
