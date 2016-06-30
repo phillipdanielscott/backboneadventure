@@ -1,24 +1,27 @@
 module.exports = Backbone.View.extend({
+ el: '#frontMenu',
 
   initialize: function (){
-    this.model.on('change', this.render,this );
+   this.model.on('change', this.render,this );
   },
+
+
 events: {
   'click #Thisissmall': 'clicked',
   'click #Thisislarge': 'large',
-  'click #Thisisgiant': 'giant'
+  'click #Thisisgiant': 'giant',
 },
 
 clicked:function(){
   console.log("clicked small");
-  document.getElementById("frontMenu").className = "";
+  // document.getElementById('small');
+  
 },
 large:function(){
   console.log("clicked large");
+
 },
 giant:function(){
   console.log("clicked giant");
 }
-
-
 });

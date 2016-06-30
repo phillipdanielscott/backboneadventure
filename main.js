@@ -2,7 +2,8 @@ let Router = require('./models/router');
 
 window.addEventListener('load', function (){
 
- let router = new Router();
+ let newroute = new Router();
+ Backbone.history.start();
 });
 
 // let Axis = new yValue({

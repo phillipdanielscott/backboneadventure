@@ -3,7 +3,8 @@ let Router = require('./models/router');
 
 window.addEventListener('load', function (){
 
- let router = new Router();
+ let newroute = new Router();
+ Backbone.history.start();
 });
 
 // let Axis = new yValue({
@@ -16,13 +17,17 @@ window.addEventListener('load', function (){
 // });
 // });
 
-},{"./models/router":3}],2:[function(require,module,exports){
+},{"./models/router":4}],2:[function(require,module,exports){
 
 
 module.exports = Backbone.Model.extend({
     defaults: {
         xValue: 0,
         yValue: 0,
+        userName:"phillip",
+        energy:10,
+        moves:0,
+        playerType: '',
     },
 
     up: function () {
@@ -47,11 +52,30 @@ module.exports = Backbone.Model.extend({
       if (this.get('xValue') < 10) {
           this.set('xValue', this.get('xValue') + 1);    }
 },
-    
+   changeMoves: function(){
+     this.set('moves', this.get('moves') + 1);
+   },
+
+   decreaseEnergy: function(){
+     this.set('energy', this.get('energy') - 1 );
+   }
+
 });
 
 },{}],3:[function(require,module,exports){
+module.exports  = Backbone.Model.extend({
+  url:'http://localhost:3000/api/players',
+  defaults: {
+      userName:"phillip",
+      energy:10,
+      moves:0,
+      score:0
+  }
+})
+
+},{}],4:[function(require,module,exports){
 let GridModel = require('./grid');
+let PlayerModel = require('./playermodel');
 let PlayerView = require('../views/player');
 let GameView = require('../views/game');
 
@@ -61,45 +85,45 @@ module.exports = Backbone.Router.extend({
 
     /////MODEl
       let myMoves = new GridModel();
+
+      let myPlayer = new PlayerModel()
     ////VIEWS
 
-      let gamerView = new GameView({
-        model: myMoves,
-        el:document.getElementById('D-pad'),
+     this.gamerView = new GameView({
+       model: myMoves,
+        el:document.getElementById('game')
       });
 
-
-    let player = new PlayerView({
-      model: myMoves,
+     this.player = new PlayerView({
+       model: myPlayer,
       el:document.getElementById('frontMenu')
     });
+},
 
-}
+
+
+routes: {
+  'startthegame': 'newGame',
+
+  // 'click':'removeFrontmenu',
+
+},
+
+    newGame: function() {
+      console.log('start the game');
+      this.player.el.classList.add('hidden');
+      this.gamerView.el.classList.remove('hidden');
+
+
+
+
+  }
+
 });
 
-
-// routes {
-//   'click':'removeFrontmenu'
-// }
-
-
-
-
-
-// removeFrontmenu: function (){
-//   console.log("we are in business");
-//   this.
-// },
-
-  // routes: {
-  //   newGame: function() {
-  //
-  //   }
-  // }
-
-},{"../views/game":4,"../views/player":5,"./grid":2}],4:[function(require,module,exports){
+},{"../views/game":5,"../views/player":6,"./grid":2,"./playermodel":3}],5:[function(require,module,exports){
 module.exports = Backbone.View.extend({
-
+el: '#game',
 initialize: function (){
   this.model.on('change', this.render,this );
 },
@@ -109,6 +133,7 @@ events: {
        'click #down': 'clickDown',
        'click #left': 'clickLeft',
        'click #right': 'clickRight',
+       'click button' : 'changeEnergy'
    },
 
    clickUp: function () {
@@ -132,6 +157,11 @@ events: {
        this.model.right()
 
    },
+   changeEnergy: function (){
+     console.log("something happened with energy");
+     this.model.decreaseEnergy();
+     this.model.changeMoves();
+   },
 
 
    render: function () {
@@ -146,33 +176,42 @@ events: {
 
         let rightButton = this.el.querySelector('#xAxis');
         rightButton.textContent = this.model.get('xValue');
+
+        let Moves = this.el.querySelector('#moves');
+        moves.textContent = this.model.get('moves');
+
+        let energy = this.el.querySelector('#energy');
+        energy.textContent = this.model.get('energy');
 }
 });
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = Backbone.View.extend({
+ el: '#frontMenu',
 
   initialize: function (){
-    this.model.on('change', this.render,this );
+   this.model.on('change', this.render,this );
   },
+
+
 events: {
   'click #Thisissmall': 'clicked',
   'click #Thisislarge': 'large',
-  'click #Thisisgiant': 'giant'
+  'click #Thisisgiant': 'giant',
 },
 
 clicked:function(){
   console.log("clicked small");
-  document.getElementById("frontMenu").className = "";
+  // document.getElementById('small');
+  
 },
 large:function(){
   console.log("clicked large");
+
 },
 giant:function(){
   console.log("clicked giant");
 }
-
-
 });
 
 },{}]},{},[1])

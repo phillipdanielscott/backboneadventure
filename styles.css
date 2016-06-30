@@ -14,10 +14,13 @@ section {
 body {
   background-color: skyblue;
 }
-.yAxis{
-  display: inline-block;
+#yAxis{
+    display: inline;
+    margin-left: 39%;
+  }
+#xAxis{
+    display: inline;
 }
-
 .hidden {
   display: none
 }
@@ -36,12 +39,13 @@ body {
 margin-top: 6%;
 }
 
-.small{
+/*.small{
   width: 20%;
   height: 20px;
   background-color: darkblue;
   color: white;
-}
+      margin-left: 64px;
+}*/
 
 .Giant{
   width: 20%;
@@ -57,10 +61,35 @@ color: white;
 }
 
 #Thisisgiant{
-
     width: 20%;
   height: 20px;
   background-color: darkblue;
   color: white;
+}
+#Thisissmall{
+  width: 20%;
+height: 20px;
+background-color: darkblue;
+color: white;
+margin-left: 80px;
+}
 
+.Border {
+  width: 60%;
+  background-color: white;
+  height: 300px;
+  margin-left: 15%;
+  margin-top: 33px;
+}
+.display{
+width: 96%;
+border: black 2px solid;
+}
+
+.energy{
+  width: 40%;
+  border: black 2px solid;
+  float: right;
+  height: 30px;
+  text-align: center;
 }

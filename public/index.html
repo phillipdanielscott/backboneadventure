@@ -9,8 +9,9 @@
 
 <!-- /////player view////// -->
 
-
+<a href="#startthegame">start the game</a>
     <div id = "frontMenu" class="Login">
+
       <div class="Usernameinput">
         <input id = "name" type="text" name="name" placeholder="USERNAME">
 
@@ -30,20 +31,32 @@
     <!-- ///game view/// -->
 
     <div id = "game" class="hidden">
+     <div class="Border">
 
-      <section id="D-pad" class = "hidden">
+      <section id="D-pad" class = "">
+        <div class="display">
+
         <div id = "yAxis">
           -
         </div>
         <div id = "xAxis">
           -
         </div>
+      </div>
+
     <button id="up"> ^ </button>
     <button id="down"> v </button>
     <button id="left"> < </button>
     <button id="right"> > </button>
       </section>
+      <div id = "energy" class="Thisisenergy">
+
+      </div>
+      <div id = "moves" class="Thisismoves">
+
+      </div>
     </div>
+  </div>
   <script src="http://underscorejs.org/underscore-min.js"></script>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script src="http://backbonejs.org/backbone-min.js"></script>

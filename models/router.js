@@ -1,4 +1,5 @@
 let GridModel = require('./grid');
+let PlayerModel = require('./playermodel');
 let PlayerView = require('../views/player');
 let GameView = require('../views/game');
 
@@ -8,38 +9,38 @@ module.exports = Backbone.Router.extend({
 
     /////MODEl
       let myMoves = new GridModel();
+
+      let myPlayer = new PlayerModel()
     ////VIEWS
 
-      let gamerView = new GameView({
-        model: myMoves,
-        el:document.getElementById('D-pad'),
+     this.gamerView = new GameView({
+       model: myMoves,
+        el:document.getElementById('game')
       });
 
-
-    let player = new PlayerView({
-      model: myMoves,
+     this.player = new PlayerView({
+       model: myPlayer,
       el:document.getElementById('frontMenu')
     });
+},
 
-}
+
+
+routes: {
+  'startthegame': 'newGame',
+
+  // 'click':'removeFrontmenu',
+
+},
+
+    newGame: function() {
+      console.log('start the game');
+      this.player.el.classList.add('hidden');
+      this.gamerView.el.classList.remove('hidden');
+
+
+
+
+  }
+
 });
-
-
-// routes {
-//   'click':'removeFrontmenu'
-// }
-
-
-
-
-
-// removeFrontmenu: function (){
-//   console.log("we are in business");
-//   this.
-// },
-
-  // routes: {
-  //   newGame: function() {
-  //
-  //   }
-  // }

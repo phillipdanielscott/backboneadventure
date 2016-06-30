@@ -4,6 +4,10 @@ module.exports = Backbone.Model.extend({
     defaults: {
         xValue: 0,
         yValue: 0,
+        userName:"phillip",
+        energy:10,
+        moves:0,
+        playerType: '',
     },
 
     up: function () {
@@ -28,5 +32,12 @@ module.exports = Backbone.Model.extend({
       if (this.get('xValue') < 10) {
           this.set('xValue', this.get('xValue') + 1);    }
 },
-    
+   changeMoves: function(){
+     this.set('moves', this.get('moves') + 1);
+   },
+
+   decreaseEnergy: function(){
+     this.set('energy', this.get('energy') - 1 );
+   }
+
 });
