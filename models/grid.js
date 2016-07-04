@@ -1,9 +1,10 @@
 
 
 module.exports = Backbone.Model.extend({
+  url:'http://grid.queencityiron.com/api/players',
     defaults: {
-        xValue: 0,
-        yValue: 0,
+        xValue: Math.floor(Math.random() * 10) + 1,
+        yValue: Math.floor(Math.random() * 10) + 1,
         userName:"phillip",
         energy:10,
         moves:0,
@@ -25,6 +26,9 @@ module.exports = Backbone.Model.extend({
     left: function () {
       if (this.get('xValue') > -10) {
           this.set('xValue', this.get('xValue') - 1);
+    //       if (this.get('startingEnergy') <= 0) {
+    //     this.trigger('gameEnded', this)
+    // }
     }
   },
 
@@ -38,6 +42,10 @@ module.exports = Backbone.Model.extend({
 
    decreaseEnergy: function(){
      this.set('energy', this.get('energy') - 1 );
+   },
+
+   Changename: function(name){
+     this.set('userName', name);
    }
 
 });

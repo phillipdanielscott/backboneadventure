@@ -58,5 +58,8 @@ events: {
 
         let energy = this.el.querySelector('#energy');
         energy.textContent = this.model.get('energy');
+
+        let Myname = this.el.querySelector('.ThisisName');
+        Myname.textContent = this.model.get('userName');
 }
 });

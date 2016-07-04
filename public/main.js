@@ -7,23 +7,14 @@ window.addEventListener('load', function (){
  Backbone.history.start();
 });
 
-// let Axis = new yValue({
-//     model: ymodel,
-//     el: document.getElementById('D-Pad'),
-//
-// let otherAxis = new xValue({
-//     model: xmodel,
-//     el: document.getElementById('D-Pad')
-// });
-// });
-
-},{"./models/router":4}],2:[function(require,module,exports){
+},{"./models/router":3}],2:[function(require,module,exports){
 
 
 module.exports = Backbone.Model.extend({
+  url:'http://grid.queencityiron.com/api/players',
     defaults: {
-        xValue: 0,
-        yValue: 0,
+        xValue: Math.floor(Math.random() * 10) + 1,
+        yValue: Math.floor(Math.random() * 10) + 1,
         userName:"phillip",
         energy:10,
         moves:0,
@@ -45,6 +36,9 @@ module.exports = Backbone.Model.extend({
     left: function () {
       if (this.get('xValue') > -10) {
           this.set('xValue', this.get('xValue') - 1);
+    //       if (this.get('startingEnergy') <= 0) {
+    //     this.trigger('gameEnded', this)
+    // }
     }
   },
 
@@ -58,26 +52,22 @@ module.exports = Backbone.Model.extend({
 
    decreaseEnergy: function(){
      this.set('energy', this.get('energy') - 1 );
+   },
+
+   Changename: function(name){
+     this.set('userName', name);
    }
 
 });
 
 },{}],3:[function(require,module,exports){
-module.exports  = Backbone.Model.extend({
-  url:'http://localhost:3000/api/players',
-  defaults: {
-      userName:"phillip",
-      energy:10,
-      moves:0,
-      score:0
-  }
-})
-
-},{}],4:[function(require,module,exports){
 let GridModel = require('./grid');
-let PlayerModel = require('./playermodel');
+let sizesCollection = require ('./sizesCollection.js')
 let PlayerView = require('../views/player');
 let GameView = require('../views/game');
+let GameOverView = require('../views/Gameover');
+// let PlayerModel = require('./playermodel');
+
 
 
 module.exports = Backbone.Router.extend({
@@ -85,8 +75,7 @@ module.exports = Backbone.Router.extend({
 
     /////MODEl
       let myMoves = new GridModel();
-
-      let myPlayer = new PlayerModel()
+      // let myPlayer = new PlayerModel()
     ////VIEWS
 
      this.gamerView = new GameView({
@@ -95,8 +84,13 @@ module.exports = Backbone.Router.extend({
       });
 
      this.player = new PlayerView({
-       model: myPlayer,
+       model: myMoves,
       el:document.getElementById('frontMenu')
+    });
+
+    this.gameOver = new GameOverView({
+      model: myMoves,
+      el:document.getElementById('gameOverContainer')
     });
 },
 
@@ -104,24 +98,80 @@ module.exports = Backbone.Router.extend({
 
 routes: {
   'startthegame': 'newGame',
-
+  'Restart': 'Backtomenu',
+  'smallbutton':'Pressedsmall',
+  'largebutton':'Pressedlarge',
+  'Giantbutton':'PressedGiant',
+  'GAMEOVER':'itHasended'
   // 'click':'removeFrontmenu',
 
 },
+    itHasended:function(){
+      console.log('ahoy! the end is nigh!')
+      this.player.el.classList.add('hidden');
+      this.gamerView.el.classList.add('hidden');
+      this.gameOver.el.classList.remove('hidden');
+    },
 
     newGame: function() {
       console.log('start the game');
       this.player.el.classList.add('hidden');
+      this.gameOver.el.classList.add('hidden');
       this.gamerView.el.classList.remove('hidden');
 
+  },
 
+  Backtomenu: function(){
+    console.log('restart');
+    this.player.el.classList.remove('hidden');
+    this.gamerView.el.classList.add('hidden');
+    this.gameOver.el.classList.add('hidden');
 
-
+  },
+  Pressedsmall:function(){
+    this.gameOver.el.classList.add('hidden');
+    this.player.el.classList.add('hidden');
+    this.gamerView.el.classList.remove('hidden');
+  },
+  Pressedlarge:function(){
+    this.gameOver.el.classList.add('hidden');
+    this.player.el.classList.add('hidden');
+    this.gamerView.el.classList.remove('hidden');
+  },
+  PressedGiant:function(){
+    this.gameOver.el.classList.add('hidden');
+    this.player.el.classList.add('hidden');
+    this.gamerView.el.classList.remove('hidden');
   }
 
 });
 
-},{"../views/game":5,"../views/player":6,"./grid":2,"./playermodel":3}],5:[function(require,module,exports){
+},{"../views/Gameover":6,"../views/game":7,"../views/player":8,"./grid":2,"./sizesCollection.js":5}],4:[function(require,module,exports){
+module.exports = Backbone.Model.extend({
+  url:'http://grid.queencityiron.com/api/players',
+  defaults:{
+    "name":"small",
+    "energyperMove":1,
+    "startingEnergy":20
+    },
+})
+
+},{}],5:[function(require,module,exports){
+let sizes = require('./sizes.js');
+module.exports = Backbone.Collection.extend({
+  url:'http://grid.queencityiron.com/api/players/3',
+  model: sizes,
+})
+
+},{"./sizes.js":4}],6:[function(require,module,exports){
+module.exports = Backbone.View.extend({
+el:'#gameOverContainer',
+initialize: function (){
+  this.model.on('change', this.render,this );
+},
+});
+
+},{}],7:[function(require,module,exports){
 module.exports = Backbone.View.extend({
 el: '#game',
 initialize: function (){
@@ -182,15 +232,28 @@ events: {
 
         let energy = this.el.querySelector('#energy');
         energy.textContent = this.model.get('energy');
+
+        let Myname = this.el.querySelector('.ThisisName');
+        Myname.textContent = this.model.get('userName');
 }
 });
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = Backbone.View.extend({
  el: '#frontMenu',
 
   initialize: function (){
    this.model.on('change', this.render,this );
+   this.newCollection = new collection();
+   let that = this
+   this.newCollection.fetch({
+     success: function(){
+       console.log(that.newCollection);
+     },
+     error: function(){
+       console.log("not working broooo")
+     }
+   });
   },
 
 
@@ -198,14 +261,25 @@ events: {
   'click #Thisissmall': 'clicked',
   'click #Thisislarge': 'large',
   'click #Thisisgiant': 'giant',
+  'click button': 'saveUser',
+},
+
+saveUser: function () {
+  let name = document.getElementById('name').value;
+  this.model.Changename(name);
 },
 
 clicked:function(){
   console.log("clicked small");
   // document.getElementById('small');
-  
+
 },
 large:function(){
+  let search = this.newCOllection.find(function(){
+    return what.get('name') === 'Large'
+  });
+  this.set('playerType','Large');
+  this.set('energy', search.get('energyPerMove'));
   console.log("clicked large");
 
 },

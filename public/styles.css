@@ -28,7 +28,7 @@ body {
 .Usernameinput {
   width: 50%;
   border: 2px white solid;
-  height: 200px;
+  height: 81px;
   margin-left: 24%;
   margin-top: 9%;
   background-color: white;
@@ -56,20 +56,20 @@ margin-top: 6%;
 #Thisislarge{
   width: 20%;
 height: 20px;
-background-color: darkblue;
+background-color: grey;
 color: white;
 }
 
 #Thisisgiant{
     width: 20%;
   height: 20px;
-  background-color: darkblue;
+  background-color: grey;
   color: white;
 }
 #Thisissmall{
   width: 20%;
 height: 20px;
-background-color: darkblue;
+background-color: grey;
 color: white;
 margin-left: 80px;
 }
@@ -91,5 +91,69 @@ border: black 2px solid;
   border: black 2px solid;
   float: right;
   height: 30px;
+  text-align: center;
+}
+
+.Gridlayout{
+width: 99%;
+border: 2px solid black;
+height: 300px;
+}
+
+#D-pad{
+  position: absolute;
+  right: 49%;
+  top: 67%;
+  background-color: white;
+}
+.section1{
+  width:100%;
+  border: 1px solid black;
+}
+.nameAndenergy {
+  width: 30%;
+  display: inline-block;
+   border: 2px solid black;
+  height: 50px;
+}
+.blahblah{
+
+}
+.topContainer{
+  width: 50%;
+  background-color: white;
+  height: 89px;
+  margin-left: 24%;
+}
+.nameAndenergy{
+display: inline-block;
+width: 39%;
+border: 2px solid black;
+height: 35px;
+}
+.block{
+  width: 18%;
+  border: 2px solid black;
+  display: inline-block;
+  height: 86px;
+  font-size: 15px;
+}
+.ThisisName{
+  width: 70px;
+border: 2px solid black;
+height: 20px;
+}
+.nameEnergytype{
+  float: right;
+margin-right: 56%;
+  /*width: 40%;
+  border: 2px solid black;
+  height: 50px;*/
+}
+.playAgain{
+  color: white;
+  font-size: 20px;
+  width:100%;
+  height: 85px;
   text-align: center;
 }

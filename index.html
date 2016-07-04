@@ -10,16 +10,18 @@
 <!-- /////player view////// -->
 
 <a href="#startthegame">start the game</a>
+<a href="#Restart">Restart</a>
+<a href="#GAMEOVER">GAME OVER</a>
     <div id = "frontMenu" class="Login">
 
       <div class="Usernameinput">
         <input id = "name" type="text" name="name" placeholder="USERNAME">
 
-        <button id = "Thisissmall" type="button" class = "small">Small</button>
+        <button id = "Thisissmall" type="button" class = "small"><a href="#smallbutton">Small</a></button>
 
-         <button id = "Thisislarge" type="button" name="large">Large</button>
+         <button id = "Thisislarge" type="button" name="large"><a href="#largebutton">Large</a></button>
 
-         <button id = "Thisisgiant" type="button" name="Giant">Giant</button>
+         <button id = "Thisisgiant" type="button" name="Giant"><a href="#Giantbutton">Giant</a></button>
 
 
       </div>
@@ -31,8 +33,43 @@
     <!-- ///game view/// -->
 
     <div id = "game" class="hidden">
-     <div class="Border">
+      <div class="topContainer">
+        <div class="block">
+         <div class="nameAttributes">
+           Name:
+         </div>
+        <div class="attributes">
+          Energy:
+        </div>
+        <div class="attributes">
+          Moves:
+        </div>
+        <div class="attributes">
+          Type:
+        </div>
+      </div>
+      <div class="nameEnergytype">
 
+     <div class="ThisisName">
+
+     </div>
+        <div class="nameAndenergy">
+
+        <div id = "energy" class="Thisisenergy">
+        </div>
+        <div id = "moves" class="Thisismoves">
+        </div>
+      </div>
+      </div>
+    </div>
+
+<!-- /////where the grid is going to go//// -->
+
+     <div class="Border">
+     <div class="blahblah">
+       <div class="Gridlayout">
+       </div>
+     </div>
       <section id="D-pad" class = "">
         <div class="display">
 
@@ -49,12 +86,16 @@
     <button id="left"> < </button>
     <button id="right"> > </button>
       </section>
-      <div id = "energy" class="Thisisenergy">
 
-      </div>
-      <div id = "moves" class="Thisismoves">
+    </div>
 
-      </div>
+  </div>
+
+  <!-- /////GAME OVER VIEW/////// -->
+
+  <div id = 'gameOverContainer' class="hidden">
+    <div class="playAgain">
+      Play Again?
     </div>
   </div>
   <script src="http://underscorejs.org/underscore-min.js"></script>
